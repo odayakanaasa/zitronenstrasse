@@ -18,7 +18,7 @@ const placeIdArray = [
   // 009 - Vux
   'ChIJC-mZa6BPqEcRMXhPH5jFJyo',
   // 010 - tier
-  'ChIJOSWgYaVPqEcR63RnoNfgsDg'
+  'ChIJOSWgYaVPqEcR63RnoNfgsDg',
 
   // ------------------------------------------
   // more than 10
@@ -48,7 +48,7 @@ const placeIdArray = [
   // more than 20
 
   // // 021 - Pony Saloon Berlin
-  // 'ChIJqwCqdclPqEcRYUkH0bnBeFk'
+  'ChIJqwCqdclPqEcRYUkH0bnBeFk'
 ]
 
 export default placeIdArray
