@@ -81,7 +81,8 @@
 
         let mapLoaded = this.map
 
-        for (let placeID of placeIdArray) {
+        // ================ Marker creation ================
+        const callOnePlaceOnMAp = (placeID) => {
           new google.maps.places.PlacesService(mapLoaded).getDetails({
             placeId: placeID
           }, (result, status) => {
@@ -131,6 +132,15 @@
             // ================ ./ end AT CLICK of a marker ================
           })
         }
+        // ================ ./ END Marker creation ================
+
+        // ================ LOOP start ================
+        for (let placeID of placeIdArray) {
+          console.log('==========================')
+          console.log('START loop')
+          callOnePlaceOnMAp(placeID)
+        }
+        // ================ LOOP End ================
       }
     }
   }
