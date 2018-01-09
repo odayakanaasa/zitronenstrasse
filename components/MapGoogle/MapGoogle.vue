@@ -23,6 +23,10 @@
   // https://s3-us-west-2.amazonaws.com/s.cdpn.io/134893/pin-red.svg
   const markerPath = 'M 8 2.1 c 1.1 0 2.2 0.5 3 1.3 c 0.8 0.9 1.3 1.9 1.3 3.1 s -0.5 2.5 -1.3 3.3 l -3 3.1 l -3 -3.1 c -0.8 -0.8 -1.3 -2 -1.3 -3.3 c 0 -1.2 0.4 -2.2 1.3 -3.1 c 0.8 -0.8 1.9 -1.3 3 -1.3 Z'
 
+  // set options for info window class and text inside
+  let isOpenClass = 'is-open-not'
+  let isOpenText = 'Closed now'
+
   export default {
     data: () => {
       const MapGoogle = {
@@ -96,9 +100,6 @@
               icon: customMarker
             })
 
-            let isOpenClass = 'is-open-not'
-            let isOpenText = 'Closed now'
-            // TODO: remove: for checking
             if (typeof result.opening_hours !== 'undefined') {
               if (result.opening_hours.open_now) {
                 isOpenClass = 'is-open-now'
@@ -109,6 +110,7 @@
               isOpenText = 'No info about opening time'
             }
 
+            // ================ AT CLICK of a marker ================
             const currentInfoWindow = new google.maps.InfoWindow({
               // here set logic for info window for each item
               // https://developers.google.com/maps/documentation/javascript/infowindows
@@ -126,6 +128,7 @@
               // set the current one as opened one
               activeInfoWindow = currentInfoWindow
             })
+            // ================ ./ end AT CLICK of a marker ================
           })
         }
       }
