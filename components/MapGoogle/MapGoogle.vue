@@ -135,11 +135,17 @@
         // ================ ./ END Marker creation ================
 
         // ================ LOOP start ================
+        console.log('==========================')
+        console.log('START loop')
         for (let placeID of placeIdArray) {
-          console.log('==========================')
-          console.log('START loop')
-          callOnePlaceOnMAp(placeID)
+          setTimeout(() => {
+            console.log('++++++++')
+            console.log(placeID)
+            callOnePlaceOnMAp(placeID)
+          }, 5000)
         }
+        console.log('==========================')
+        console.log('END loop')
         // ================ LOOP End ================
       }
     }
