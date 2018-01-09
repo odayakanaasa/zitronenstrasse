@@ -88,7 +88,9 @@
 
             // marker
             let marker = new google.maps.Marker({
+              // on which map set the marker
               map: mapLoaded,
+              // where set on the map
               position: result.geometry.location,
               // set icon custom style
               icon: customMarker
