@@ -106,6 +106,7 @@
         }
 
         const markerOptions = (map, placeID, result) => {
+          // TODO fade in. plain JS, VUE or JQUERY?
           const marker = new google.maps.Marker({
             map: map,
             place: {
