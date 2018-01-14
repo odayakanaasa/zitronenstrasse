@@ -55,7 +55,7 @@
 </style>
 
 <script>
-  // import placeIdArray from '~/components/MapGoogle/_placesIdArrays.js'
+  import placeIdArray from '~/components/MapGoogle/_placesIdArrays.js'
   import mapStylesDark from '~/components/MapGoogle/_mapStylesDark.js'
 
   export default {
@@ -75,6 +75,55 @@
       initMap () {
         const google = window.google
 
+        const placeItemsNumber = placeIdArray.length
+        const timerFirstRound = 300
+
+        // time for fallback tieout if one item lost at first round.
+        // workaroud for Google API query timeout
+        // MAGIC NUMBER! set on how many places you have + time for showing them ...
+        // right now more than 7 seconds ...
+        const timerFallbackRound = timerFirstRound * placeItemsNumber / 2 + timerFirstRound
+
+        const markerOptions = (map, placeID, result) => {
+          const marker = new google.maps.Marker({
+            map: map,
+            place: {
+              placeId: placeID,
+              location: result.geometry.location
+            }
+          })
+          return marker
+        }
+
+        const setMarker = (map, placeID, indexNumber) => {
+          setTimeout(() => {
+            new google.maps.places.PlacesService(map).getDetails({
+              placeId: placeID
+            }, (result, status) => {
+              if (status === google.maps.places.PlacesServiceStatus.OK) {
+                markerOptions(map, placeID, result)
+              } else {
+                setTimeout(() => {
+                  new google.maps.places.PlacesService(map).getDetails({
+                    placeId: placeID
+                  }, function (result, status) {
+                    if (status === google.maps.places.PlacesServiceStatus.OK) {
+                      markerOptions(map, placeID, result)
+                    } else {
+                      console.error('💩 💩 💩')
+                      // for debugging ...
+                      // console.error(indexNumber + 1)
+                      // console.error(placeID)
+                      // console.error(status)
+                    }
+                  })
+                // YOU HAVE TO WAIT the time to end for the array loop (so you not mess it up), then start
+                }, timerFallbackRound)
+              }
+            })
+          }, indexNumber * timerFirstRound)
+        }
+
         // init map with options
         this.map = new google.maps.Map(document.getElementById('google-map'), {
           center: {
@@ -90,6 +139,13 @@
             styles: mapStylesDark
           }
         })
+
+        // http://javascriptissexy.com/understand-javascript-callback-functions-and-use-them/
+        placeIdArray.forEach((placeID, indexNumber) => {
+          setMarker(this.map, placeID, indexNumber)
+        })
+
+      // ./ end method initMap
       }
     // ./ end methods
     }
