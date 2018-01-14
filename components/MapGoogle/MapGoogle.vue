@@ -75,6 +75,8 @@
       initMap () {
         const google = window.google
 
+        let activeInfoWindow
+
         const placeItemsNumber = placeIdArray.length
         const timerFirstRound = 400
 
@@ -116,6 +118,38 @@
             // set icon custom style
             icon: customMarker
           })
+
+          let isOpenClass = 'is-open-not'
+          let isOpenText = 'Closed now'
+          // TODO: remove: for checking
+          if (typeof result.opening_hours !== 'undefined') {
+            if (result.opening_hours.open_now) {
+              isOpenClass = 'is-open-now'
+              isOpenText = 'Open now'
+            }
+          } else {
+            isOpenClass = 'is-open-unknown'
+            isOpenText = 'No info about opening time'
+          }
+
+          const currentInfoWindow = new google.maps.InfoWindow({
+            // here set logic for info window for each item
+            // https://developers.google.com/maps/documentation/javascript/infowindows
+            content: `
+              <p class='text title'>${result.name}</p>
+              <p class='text address'>${result.adr_address}</p>
+              <p class='text open-time ${isOpenClass}'>${isOpenText}</p>
+            `
+          })
+          google.maps.event.addListener(marker, 'click', (el) => {
+            // close info window of previous opened marker : reset
+            activeInfoWindow && activeInfoWindow.close()
+            // open current clicked one
+            currentInfoWindow.open(this.map, marker)
+            // set the current one as opened one
+            activeInfoWindow = currentInfoWindow
+          })
+
           return marker
         }
 
@@ -168,7 +202,6 @@
         placeIdArray.forEach((placeID, indexNumber) => {
           setMarker(this.map, placeID, indexNumber)
         })
-
       // ./ end method initMap
       }
     // ./ end methods
