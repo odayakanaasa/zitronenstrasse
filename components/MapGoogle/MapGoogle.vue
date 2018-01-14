@@ -141,7 +141,9 @@
               <p class='text open-time ${isOpenClass}'>${isOpenText}</p>
             `
           })
-          google.maps.event.addListener(marker, 'click', (el) => {
+
+          // marker at click
+          google.maps.event.addListener(marker, 'click', () => {
             // close info window of previous opened marker : reset
             activeInfoWindow && activeInfoWindow.close()
             // open current clicked one
