@@ -59,7 +59,7 @@
   import mapStylesDark from '~/components/MapGoogle/_mapStylesDark.js'
 
   export default {
-    data: () => {
+    data () {
       const MapGoogle = {
         // empty object
       }
@@ -67,13 +67,12 @@
     },
 
     // mounted: WHEN ALL code on server is already loaded!
-    mounted: function () {
-      // what is this 'this' ??? we cannot use here ES6 ...
+    mounted () {
       this.initMap()
     },
 
     methods: {
-      initMap: function () {
+      initMap () {
         const google = window.google
 
         // init map with options
@@ -92,6 +91,7 @@
           }
         })
       }
+    // ./ end methods
     }
   }
 </script>
