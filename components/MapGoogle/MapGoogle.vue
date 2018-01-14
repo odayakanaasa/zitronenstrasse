@@ -76,7 +76,7 @@
         const google = window.google
 
         const placeItemsNumber = placeIdArray.length
-        const timerFirstRound = 300
+        const timerFirstRound = 400
 
         // time for fallback tieout if one item lost at first round.
         // workaroud for Google API query timeout
