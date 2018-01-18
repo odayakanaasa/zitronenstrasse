@@ -7,11 +7,22 @@
       :options='mapOptions'
     )
 
+      gmap-info-window(
+        :options='infoOptions'
+        :position='infoWindowPos'
+        :opened='infoWinOpen'
+        @closeclick='infoWinOpen=false'
+      )
+        //- | {{infoContent}}
+        | ciaone
+
       gmap-marker(
         :key='index'
         v-for='(marker, index) in markers'
         :position='marker.position'
         :icon="mapIconShape"
+        :clickable='true'
+        @click='toggleInfoWindow(marker, index)'
       )
 </template>
 
@@ -93,6 +104,20 @@
           // set custom map styles
           styles: mapStylesDark
         },
+        infoContent: '',
+        infoWindowPos: {
+          lat: 0,
+          lng: 0
+        },
+        infoWinOpen: false,
+        currentMidx: null,
+        // optional: offset infowindow so it visually sits nicely on top of our marker
+        infoOptions: {
+          pixelOffset: {
+            width: 0,
+            height: -35
+          }
+        },
 
         // ------------------------------
         // markers : to test !!!
@@ -104,14 +129,16 @@
             position: {
               lat: 52.4928835,
               lng: 13.452538
-            }
+            },
+            infoText: 'Marker Molecule Men'
           },
           // Flughafen / Airport Tempelhof
           {
             position: {
               lat: 52.482371,
               lng: 13.422217
-            }
+            },
+            infoText: 'Marker Tempelhof'
           }
         ],
         mapIconShape: {
@@ -127,7 +154,22 @@
       }
 
       return MapGoogleLogic
+    },
+    methods: {
+      toggleInfoWindow: function (marker, idx) {
+        this.infoWindowPos = marker.positio
+        this.infoContent = marker.infoText
+        // check if its the same marker that was selected if yes toggle
+        if (this.currentMidx === idx) {
+          this.infoWinOpen = !this.infoWinOpen
+        // if different marker set infowindow to open and reset current marker index
+        } else {
+          this.infoWinOpen = true
+          this.currentMidx = idx
+        }
+      }
     }
+
     //
     // // mounted: WHEN ALL code on server is already loaded!
     // mounted () {
