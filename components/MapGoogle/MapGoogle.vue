@@ -1,9 +1,13 @@
-<template lang="pug">
-  .map-main-wrapper
-    .google-map#google-map
+<template>
+ <div class='map-main-wrapper'>
+   <gmap-map
+     :zoom='mapZoom'
+     :center='mapCenterPosition'
+     :options='mapOptions'
+   >
+  </gmap-map>
+</div>
 </template>
-
-
 
 
 <style lang="sass">
@@ -11,10 +15,11 @@
     width: 100%
     min-height: 100%
 
-  .google-map
-    position: absolute
-    width: 100%
-    height: 100%
+    // the Google MAP
+    .vue-map-container
+      position: absolute
+      width: 100%
+      height: 100%
 
   // map bg whn loading
   .gm-style
@@ -51,14 +56,27 @@
 
 <script>
   // import placeIdArray from '~/components/MapGoogle/_placesIdArrays.js'
-  // import mapStylesDark from '~/components/MapGoogle/_mapStylesDark.js'
-
-  console.log('MAP component')
+  import mapStylesDark from '~/components/MapGoogle/_mapStylesDark.js'
 
   export default {
     data () {
-      // empty object
-      return {}
+      return {
+        mapZoom: 14,
+        // map position: set my custom BERLIN map info
+        mapCenterPosition: {
+          lat: 52.486757,
+          lng: 13.4252209
+        },
+        mapOptions: {
+          streetViewControl: false,
+          fullscreenControl: false,
+          mapTypeControl: false,
+          // disableDefaultUI: true,
+          // attributionControl: false,
+          // set custom map styles
+          styles: mapStylesDark
+        }
+      }
     }
     //
     // // mounted: WHEN ALL code on server is already loaded!
