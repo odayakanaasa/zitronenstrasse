@@ -66,7 +66,7 @@
 
   export default {
     data () {
-      return {
+      const MapGoogleLogic = {
         mapZoom: 14,
         // map position: set my custom BERLIN map info
         mapCenterPosition: {
@@ -104,6 +104,8 @@
           }
         ]
       }
+
+      return MapGoogleLogic
     }
     //
     // // mounted: WHEN ALL code on server is already loaded!
