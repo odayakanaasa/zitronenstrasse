@@ -182,7 +182,7 @@ module.exports = {
     script: [
       {
         // call google map javascript API
-        src: `https://maps.googleapis.com/maps/api/js?key=${mapApiKey}&v=3&libraries=places`, async: true, defer: true
+        // src: `https://maps.googleapis.com/maps/api/js?key=${mapApiKey}&v=3&libraries=places`, async: true, defer: true
       }
     ]
   },
