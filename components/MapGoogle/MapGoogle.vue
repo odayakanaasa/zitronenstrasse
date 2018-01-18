@@ -1,25 +1,18 @@
-<template>
+<template lang="pug">
+  .map-main-wrapper
 
-  <div class='map-main-wrapper'>
-
-    <gmap-map
-      :zoom='mapZoom'
-      :center='mapCenterPosition'
+    gmap-map.google-map(
+      :center='mapCenterPosition',
+      :zoom='mapZoom',
       :options='mapOptions'
-    >
+    )
 
-      <gmap-marker
+      gmap-marker(
         :key='index'
         v-for='(marker, index) in markers'
         :position='marker.position'
         :clickable='true'
-      >
-      </gmap-marker>
-
-    </gmap-map>
-
-  </div>
-
+      )
 </template>
 
 
