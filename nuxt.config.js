@@ -234,7 +234,7 @@ module.exports = {
   ** Customize the Vue Plugins
   */
   plugins: [
-    // TODO
+    '~/plugins/vue-google-maps'
   ],
 
   /*
