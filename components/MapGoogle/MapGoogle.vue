@@ -1,12 +1,25 @@
 <template>
- <div class='map-main-wrapper'>
-   <gmap-map
-     :zoom='mapZoom'
-     :center='mapCenterPosition'
-     :options='mapOptions'
-   >
-  </gmap-map>
-</div>
+
+  <div class='map-main-wrapper'>
+
+    <gmap-map
+      :zoom='mapZoom'
+      :center='mapCenterPosition'
+      :options='mapOptions'
+    >
+
+      <gmap-marker
+        :key='index'
+        v-for='(marker, index) in markers'
+        :position='marker.position'
+        :clickable='true'
+      >
+      </gmap-marker>
+
+    </gmap-map>
+
+  </div>
+
 </template>
 
 
@@ -75,7 +88,28 @@
           // attributionControl: false,
           // set custom map styles
           styles: mapStylesDark
-        }
+        },
+
+        // ------------------------------
+        // markers : to test !!!
+        // place ID finder:
+        // https://developers.google.com/places/place-id
+        markers: [
+          // Molecule Men
+          {
+            position: {
+              lat: 52.4928835,
+              lng: 13.452538
+            }
+          },
+          // Flughafen / Airport Tempelhof
+          {
+            position: {
+              lat: 52.482371,
+              lng: 13.422217
+            }
+          }
+        ]
       }
     }
     //
