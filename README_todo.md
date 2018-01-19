@@ -23,6 +23,8 @@ Zitronenstrasse | TODO
 ### Update REAME FILE (set this list into read me as roadmap)
 
 
+## WIP:
+##### maybe set a delay with increasing time. first item appears fast, the slowly...
 
 
 ## NICE TO HAVE
@@ -30,8 +32,6 @@ Zitronenstrasse | TODO
 #### MAP VUE PLUGIN: check if possible to use it with place ID
 
 #### MAP LOAD ONCE: check if possible to load it ONCE, maybe on layout
-
-#### MAP LOAD 10by10: check if we break array in sub arrays with bigger time out looks better
 
 #### MAP COMPONENT: set the JS code more modular
 
